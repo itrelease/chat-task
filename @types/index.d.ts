@@ -1,3 +1,8 @@
+type SettingsType = {
+  timeFormat: "12h" | "24h";
+  ctrlEnter: boolean;
+};
+
 type UserType = {
   id: string;
   color: string;
@@ -10,9 +15,9 @@ type MessageDataType =
       value: string;
     }
   | {
-      type: "image";
+      type: "url";
       value: string;
-      loaded: boolean;
+      contentType: "image" | "unknown";
     };
 
 type MessageType = {
@@ -25,5 +30,6 @@ type MessageType = {
 type ChatType = {
   currentUser: UserType;
   users: { [key: string]: UserType };
+  messageIndexById: { [key: string]: number };
   messages: Array<MessageType>;
 };

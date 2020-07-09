@@ -1,20 +1,30 @@
 import React from "react";
 
 import { useChat } from "../../hooks/useChat";
+import { MessageList } from "./MessageList";
+import { MessageInput } from "./MessageInput";
 import { styles } from "./Chat.styles";
 
 export const Chat = () => {
-  const chat = useChat();
+  const { currentUser, messages, users } = useChat();
 
-  console.log("Chat#render", { chat });
+  console.log("Chat#render");
 
   return (
     <div className="Chat">
       <style jsx>{styles}</style>
-      <h1>Chat</h1>
 
-      {/* <MessageList currentUser={{}} messages={[]} users={[]} /> */}
-      {/* <MessageInput currentUser={{}} /> */}
+      <div className="Chat-content">
+        <div className="Chat-messageList">
+          <MessageList
+            currentUser={currentUser}
+            messages={messages}
+            users={users}
+          />
+        </div>
+      </div>
+
+      <MessageInput currentUser={currentUser} />
     </div>
   );
 };

@@ -13,5 +13,6 @@ export const styles = css`
     background-color: #fff;
     display: flex;
     flex: 1;
+    flex-direction: column;
   }
 `;

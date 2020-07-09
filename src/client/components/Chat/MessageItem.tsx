@@ -11,11 +11,19 @@ type PropsType = {
 export const MessageItem = React.memo(
   ({ currentUser, sender, message }: PropsType) => {
     console.log("MessageItem#render", { currentUser, sender, message });
+    const style = {
+      backgroundColor: sender.color,
+    };
 
     return (
-      <div className="MessageItem">
+      <div className="MessageItem" style={style}>
         <style jsx>{styles}</style>
-        <h1>MessageItem</h1>
+
+        <div className="MessageItem-content">
+          {message.data.map((item) => {
+            return <p>{item.value}</p>;
+          })}
+        </div>
       </div>
     );
   }

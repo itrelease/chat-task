@@ -28,6 +28,7 @@ const ChatProvider: FunctionComponent<PropsType> = ({
       color: getColorFromId(currentUserId),
     },
     messages: [],
+    messageIndexById: {},
     users: {},
   });
   const handleUserConnected = useCallback(

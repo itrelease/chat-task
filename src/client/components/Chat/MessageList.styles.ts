@@ -6,6 +6,7 @@ export const styles = css`
     display: flex;
     flex-direction: column;
     align-items: self-start;
+    overflow: scroll;
   }
 
   .MessageList-item {

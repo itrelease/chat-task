@@ -59,6 +59,169 @@ export const MessageList = ({ currentUser, messages, users }: PropsType) => {
         />
       </div>
 
+      {/*  */}
+      {/* <div className="MessageList-item">
+        <MessageItem
+          message={testMessage}
+          sender={testM1User}
+          currentUser={currentUser}
+        />
+      </div>
+
+      <div className="MessageList-item" data-own={true}>
+        <MessageItem
+          message={{
+            ...testMessage,
+            id: "testCU1",
+            userId: currentUser.id,
+            timestamp: Date.now(),
+          }}
+          sender={currentUser}
+          currentUser={currentUser}
+        />
+      </div>
+      <div className="MessageList-item">
+        <MessageItem
+          message={testMessage}
+          sender={testM1User}
+          currentUser={currentUser}
+        />
+      </div>
+
+      <div className="MessageList-item" data-own={true}>
+        <MessageItem
+          message={{
+            ...testMessage,
+            id: "testCU1",
+            userId: currentUser.id,
+            timestamp: Date.now(),
+          }}
+          sender={currentUser}
+          currentUser={currentUser}
+        />
+      </div>
+      <div className="MessageList-item">
+        <MessageItem
+          message={testMessage}
+          sender={testM1User}
+          currentUser={currentUser}
+        />
+      </div>
+
+      <div className="MessageList-item" data-own={true}>
+        <MessageItem
+          message={{
+            ...testMessage,
+            id: "testCU1",
+            userId: currentUser.id,
+            timestamp: Date.now(),
+          }}
+          sender={currentUser}
+          currentUser={currentUser}
+        />
+      </div>
+      <div className="MessageList-item">
+        <MessageItem
+          message={testMessage}
+          sender={testM1User}
+          currentUser={currentUser}
+        />
+      </div>
+
+      <div className="MessageList-item" data-own={true}>
+        <MessageItem
+          message={{
+            ...testMessage,
+            id: "testCU1",
+            userId: currentUser.id,
+            timestamp: Date.now(),
+          }}
+          sender={currentUser}
+          currentUser={currentUser}
+        />
+      </div>
+      <div className="MessageList-item">
+        <MessageItem
+          message={testMessage}
+          sender={testM1User}
+          currentUser={currentUser}
+        />
+      </div>
+
+      <div className="MessageList-item" data-own={true}>
+        <MessageItem
+          message={{
+            ...testMessage,
+            id: "testCU1",
+            userId: currentUser.id,
+            timestamp: Date.now(),
+          }}
+          sender={currentUser}
+          currentUser={currentUser}
+        />
+      </div>
+      <div className="MessageList-item">
+        <MessageItem
+          message={testMessage}
+          sender={testM1User}
+          currentUser={currentUser}
+        />
+      </div>
+
+      <div className="MessageList-item" data-own={true}>
+        <MessageItem
+          message={{
+            ...testMessage,
+            id: "testCU1",
+            userId: currentUser.id,
+            timestamp: Date.now(),
+          }}
+          sender={currentUser}
+          currentUser={currentUser}
+        />
+      </div>
+      <div className="MessageList-item">
+        <MessageItem
+          message={testMessage}
+          sender={testM1User}
+          currentUser={currentUser}
+        />
+      </div>
+
+      <div className="MessageList-item" data-own={true}>
+        <MessageItem
+          message={{
+            ...testMessage,
+            id: "testCU1",
+            userId: currentUser.id,
+            timestamp: Date.now(),
+          }}
+          sender={currentUser}
+          currentUser={currentUser}
+        />
+      </div>
+      <div className="MessageList-item">
+        <MessageItem
+          message={testMessage}
+          sender={testM1User}
+          currentUser={currentUser}
+        />
+      </div>
+
+      <div className="MessageList-item" data-own={true}>
+        <MessageItem
+          message={{
+            ...testMessage,
+            id: "testCU1",
+            userId: currentUser.id,
+            timestamp: Date.now(),
+          }}
+          sender={currentUser}
+          currentUser={currentUser}
+        />
+      </div> */}
+      {/*  */}
+
       {messages.map((message) => {
         return (
           <div key={message.id} className="MessageList-item">

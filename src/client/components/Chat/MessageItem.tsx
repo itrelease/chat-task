@@ -21,7 +21,7 @@ export const MessageItem = React.memo(
 
         <div className="MessageItem-content">
           {message.data.map((item) => {
-            return <p>{item.value}</p>;
+            return <span>{item.value}</span>;
           })}
         </div>
       </div>

@@ -39,11 +39,11 @@ export const MessageItem = React.memo(
         </div>
 
         <div className="MessageItem-content">
-          {message.data.map((item) => {
+          {message.data.map((item, index) => {
             return item.type === "url" && item.contentType === "image" ? (
-              <img src={item.value} />
+              <img key={index} src={item.value} />
             ) : (
-              <span>{item.value}</span>
+              <span key={index}>{item.value}</span>
             );
           })}
         </div>

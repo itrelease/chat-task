@@ -8,7 +8,10 @@ type PropsType = {
 };
 
 const SettingsContext = React.createContext<{
+  status: SettingsStatusType;
   settings: SettingsType;
+  open: () => void;
+  close: () => void;
   updateSettings: (newSettings: SettingsType) => void;
 }>(null);
 
@@ -16,6 +19,7 @@ const SettingsProvider: FunctionComponent<PropsType> = ({
   settings,
   children,
 }) => {
+  const [status, setStatus] = useState<SettingsStatusType>("closed");
   const [currentSettings, setSettings] = useState<SettingsType>(settings);
   const updateSettings = (newSettings: SettingsType) => {
     if (isStorageAvailable("localStorage")) {
@@ -24,9 +28,26 @@ const SettingsProvider: FunctionComponent<PropsType> = ({
 
     setSettings(newSettings);
   };
+  const close = () => {
+    setStatus("closing");
+
+    setTimeout(() => {
+      setStatus("closed");
+    }, 0);
+  };
+  const open = () => {
+    setStatus("opening");
+
+    setTimeout(() => {
+      setStatus("opened");
+    }, 0);
+  };
   const value = {
+    status,
     settings: currentSettings,
     updateSettings,
+    open,
+    close,
   };
 
   return (

@@ -19,6 +19,6 @@ export const styles = css`
   }
 
   .Header-action--right {
-    right: 24px;
+    right: 16px;
   }
 `;

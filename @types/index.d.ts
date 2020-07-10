@@ -1,3 +1,5 @@
+type SettingsStatusType = "closed" | "closing" | "opening" | "opened";
+
 type SettingsType = {
   timeFormat: "12h" | "24h";
   ctrlEnter: boolean;

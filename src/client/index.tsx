@@ -2,17 +2,14 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { nanoid } from "nanoid";
 
-import { CURRENT_USER_ID_KEY, SETTINGS_KEY } from "./constants";
+import { CURRENT_USER_ID_KEY, SETTINGS_KEY, USER_SETTINGS } from "./constants";
 import { App } from "./components/App/App";
 import { SettingsProvider } from "./hooks/useSettings";
 import { ChatProvider } from "./hooks/useChat";
 import { isStorageAvailable } from "./utils/isStorageAvailable";
 
 let currentUserId = null;
-let userSettings: SettingsType = {
-  timeFormat: "12h",
-  ctrlEnter: true,
-};
+let userSettings = USER_SETTINGS;
 
 const isLocalStorageAvailable = isStorageAvailable("localStorage");
 

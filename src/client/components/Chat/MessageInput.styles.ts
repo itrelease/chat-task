@@ -6,7 +6,7 @@ export const styles = css`
     align-items: center;
     background-color: #222;
     color: #fff;
-    padding: 12px;
+    padding: 14px 16px;
   }
 
   .MessageInput-input {

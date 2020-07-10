@@ -27,7 +27,7 @@ if (isLocalStorageAvailable) {
 }
 
 if (!currentUserId) {
-  currentUserId = nanoid();
+  currentUserId = `Guest${nanoid()}`;
 
   if (isLocalStorageAvailable) {
     window.localStorage.setItem(CURRENT_USER_ID_KEY, currentUserId);

@@ -15,9 +15,13 @@ export const MessageInput = React.memo(({ currentUser }: PropsType) => {
     <div className="MessageInput">
       <style jsx>{styles}</style>
 
-      <input className="MessageInput-input" type="text" />
+      <input
+        className="MessageInput-input"
+        type="text"
+        placeholder="Type your message..."
+      />
 
-      <Button onClick={() => {}}>
+      <Button color="dark" onClick={() => {}}>
         <IconSendMessage tintColor="#fff" />
       </Button>
     </div>

@@ -1,5 +1,6 @@
 import React from "react";
 
+import { Timestamp } from "./Timestamp";
 import { styles } from "./MessageItem.styles";
 
 type PropsType = {
@@ -14,16 +15,44 @@ export const MessageItem = React.memo(
     const style = {
       backgroundColor: sender.color,
     };
+    const arrowClassName =
+      currentUser.id === sender.id
+        ? "MessageItem-arrow MessageItem-arrow--right"
+        : "MessageItem-arrow MessageItem-arrow--left";
+    const arrowStyle: {
+      borderRightColor?: string;
+      borderLeftColor?: string;
+    } = {};
+
+    if (currentUser.id === sender.id) {
+      arrowStyle.borderLeftColor = sender.color;
+    } else {
+      arrowStyle.borderRightColor = sender.color;
+    }
 
     return (
       <div className="MessageItem" style={style}>
         <style jsx>{styles}</style>
 
+        <div className="MessageItem-meta">
+          <span>#{currentUser.id}</span>
+        </div>
+
         <div className="MessageItem-content">
           {message.data.map((item) => {
-            return <span>{item.value}</span>;
+            return item.type === "url" && item.contentType === "image" ? (
+              <img src={item.value} />
+            ) : (
+              <span>{item.value}</span>
+            );
           })}
         </div>
+
+        <div className="MessageItem-meta MessageItem-meta--time">
+          <Timestamp timestamp={message.timestamp} />
+        </div>
+
+        <span className={arrowClassName} style={arrowStyle} />
       </div>
     );
   }

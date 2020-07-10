@@ -14,8 +14,12 @@ export const styles = css`
     outline: none;
   }
 
-  .Button:hover {
-    background-color: rgba(80, 0, 0, 0.35);
+  .Button[data-color="red"]:hover {
+    background-color: #f44336;
+  }
+
+  .Button[data-color="dark"]:hover {
+    background-color: #37474f;
   }
 
   .Button:active {

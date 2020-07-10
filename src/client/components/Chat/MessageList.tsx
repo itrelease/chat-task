@@ -20,7 +20,16 @@ const testMessage: MessageType = {
   id: "testM1",
   userId: "testU1",
   timestamp: Date.now(),
-  data: [{ type: "text", value: "whoa" }],
+  data: [
+    { type: "text", value: "whoa" },
+    {
+      type: "url",
+      value:
+        "https://innotechtoday.com/wp-content/uploads/2018/10/satellite-1030779_1280.jpg",
+      contentType: "image",
+    },
+    { type: "url", value: "https://google.com", contentType: "unknown" },
+  ],
 };
 
 export const MessageList = ({ currentUser, messages, users }: PropsType) => {
@@ -29,14 +38,6 @@ export const MessageList = ({ currentUser, messages, users }: PropsType) => {
   return (
     <div className="MessageList">
       <style jsx>{styles}</style>
-      <h1>MessageList</h1>
-      <p>test 1</p>
-      <p>test 2</p>
-      <p>test 3</p>
-      <p>test 4</p>
-      <p>test 5</p>
-      <p>test 6</p>
-      <p>test 7</p>
 
       <div className="MessageList-item">
         <MessageItem

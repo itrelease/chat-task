@@ -2,7 +2,7 @@ import css from "styled-jsx/css";
 
 export const styles = css`
   .MessageList {
-    padding: 0 12px;
+    padding: 16px 16px 0;
     display: flex;
     flex-direction: column;
     align-items: self-start;
@@ -10,10 +10,14 @@ export const styles = css`
   }
 
   .MessageList-item {
-    margin-bottom: 8px;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 16px;
+    max-width: 70%;
   }
 
   .MessageList-item[data-own="true"] {
+    justify-content: flex-end;
     align-self: flex-end;
   }
 `;

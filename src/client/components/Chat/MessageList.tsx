@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import { MessageItem } from "./MessageItem";
 import { EmptyState } from "./EmptyState";
@@ -13,10 +13,22 @@ type PropsType = {
 export const MessageList = React.memo(
   ({ currentUser, messages, users }: PropsType) => {
     console.log("MessageList#render", { currentUser, messages, users });
+    const ref = useRef<HTMLDivElement>(null);
     const isEmpty = messages.length === 0;
 
+    useEffect(() => {
+      if (ref.current) {
+        const { scrollHeight, scrollTop, offsetHeight } = ref.current;
+        const scrollDiff = scrollTop + offsetHeight - scrollHeight;
+
+        if (Math.abs(scrollDiff) < 200) {
+          ref.current.scrollTop = ref.current.scrollHeight;
+        }
+      }
+    }, [ref, messages]);
+
     return (
-      <div className="MessageList" data-empty={isEmpty}>
+      <div ref={ref} className="MessageList" data-empty={isEmpty}>
         <style jsx>{styles}</style>
 
         {isEmpty && (

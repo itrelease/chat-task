@@ -40,4 +40,5 @@ type ChatType = {
   messageIndexById: { [key: string]: number };
   messages: Array<MessageType>;
   updateUserName: (userId: string, userName: string) => void;
+  sendMessage: (message: string) => void;
 };

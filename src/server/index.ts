@@ -1,5 +1,6 @@
 import express, { Request, Response } from "express";
 import socket from "socket.io";
+import { nanoid } from "nanoid";
 
 const app = express();
 const PORT = 3000;
@@ -21,12 +22,13 @@ type CustomSocketType = socket.Socket & {
 };
 
 io.on("connection", function (socket: CustomSocketType) {
-  console.log("Made socket connection");
-
-  socket.on("join", function (user: UserType) {
-    socket.user = user;
-    users.set(user.id, user);
-    socket.broadcast.emit("userConnected", user);
+  socket.on("join", function (user: CurrentUserType) {
+    socket.user = {
+      ...user,
+      online: true,
+    };
+    users.set(user.id, socket.user);
+    io.emit("userConnected", socket.user);
   });
 
   socket.on("userUpdateName", function ({
@@ -42,8 +44,32 @@ io.on("connection", function (socket: CustomSocketType) {
     };
 
     users.set(userId, socket.user);
-    console.log("%%%%%%%%% USER UPDATE NAME", socket.user);
     io.emit("userUpdate", socket.user);
+  });
+
+  socket.on("newMessage", function ({
+    userId,
+    message,
+  }: {
+    userId: string;
+    message: string;
+  }) {
+    const prepatedMessage: MessageType = {
+      id: nanoid(),
+      userId,
+      timestamp: Date.now(),
+      data: [
+        {
+          type: "text",
+          value: message,
+        },
+      ],
+    };
+
+    io.emit("receiveMessage", {
+      message: prepatedMessage,
+      user: users.get(userId),
+    });
   });
 
   socket.on("disconnect", () => {
@@ -54,6 +80,6 @@ io.on("connection", function (socket: CustomSocketType) {
       online: false,
     };
 
-    socket.broadcast.emit("userDisconnected", disconnectedUser);
+    io.emit("userDisconnected", disconnectedUser);
   });
 });

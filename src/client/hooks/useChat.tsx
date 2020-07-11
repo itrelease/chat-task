@@ -27,26 +27,49 @@ const ChatProvider: FunctionComponent<PropsType> = ({
     },
     [socketInstance.current]
   );
+  const handleSendMessage = useCallback(
+    (message: string) => {
+      if (socketInstance.current) {
+        socketInstance.current.emit("newMessage", {
+          userId: currentUser.id,
+          message,
+        });
+      }
+    },
+    [socketInstance.current, currentUser]
+  );
   const [chat, setChat] = useState<ChatType>({
     messages: [],
     messageIndexById: {},
     users: {},
     updateUserName: handleUpdateUserName,
+    sendMessage: handleSendMessage,
   });
-  const handleUserUpdate = useCallback(
-    (user: UserType) => {
-      console.log("handleUserUpdate", user);
-
-      setChat({
-        ...chat,
-        users: {
-          ...chat.users,
-          [user.id]: user,
-        },
-      });
-    },
-    [chat]
-  );
+  const handleUserUpdate = (user: UserType) => {
+    setChat({
+      ...chat,
+      users: {
+        ...chat.users,
+        [user.id]: user,
+      },
+    });
+  };
+  const handleReceiveMessage = ({
+    message,
+    user,
+  }: {
+    message: MessageType;
+    user: UserType;
+  }) => {
+    setChat({
+      ...chat,
+      messages: chat.messages.concat(message),
+      users: {
+        ...chat.users,
+        [user.id]: user,
+      },
+    });
+  };
 
   useEffect(() => {
     if (!socketInstance.current) {
@@ -55,16 +78,6 @@ const ChatProvider: FunctionComponent<PropsType> = ({
       socketInstance.current.on("connect", () => {
         socketInstance.current.emit("join", currentUser);
       });
-
-      socketInstance.current.on("userConnected", handleUserUpdate);
-
-      socketInstance.current.on("userDisconnected", handleUserUpdate);
-
-      socketInstance.current.on("userUpdate", handleUserUpdate);
-
-      // socketInstance.current.on("new message", (data) => {
-      //   console.log("new message", data);
-      // });
     }
 
     return () => {
@@ -74,6 +87,22 @@ const ChatProvider: FunctionComponent<PropsType> = ({
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (socketInstance.current) {
+      socketInstance.current.on("userConnected", handleUserUpdate);
+      socketInstance.current.on("userDisconnected", handleUserUpdate);
+      socketInstance.current.on("userUpdate", handleUserUpdate);
+      socketInstance.current.on("receiveMessage", handleReceiveMessage);
+    }
+
+    return () => {
+      socketInstance.current.off("userConnected", handleUserUpdate);
+      socketInstance.current.off("userDisconnected", handleUserUpdate);
+      socketInstance.current.off("userUpdate", handleUserUpdate);
+      socketInstance.current.off("receiveMessage", handleReceiveMessage);
+    };
+  }, [socketInstance, handleUserUpdate, handleReceiveMessage]);
 
   return <ChatContext.Provider value={chat}>{children}</ChatContext.Provider>;
 };

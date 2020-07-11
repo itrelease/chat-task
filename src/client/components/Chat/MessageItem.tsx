@@ -34,8 +34,15 @@ export const MessageItem = React.memo(
       <div className="MessageItem" style={style}>
         <style jsx>{styles}</style>
 
-        <div className="MessageItem-meta">
+        <div className="MessageItem-meta MessageItem-meta--info">
           <span>{sender.name}</span>
+
+          {sender.id !== currentUser.id && (
+            <span
+              className="MessageItem-status"
+              data-value={sender.online ? "online" : "offline"}
+            />
+          )}
         </div>
 
         <div className="MessageItem-content">

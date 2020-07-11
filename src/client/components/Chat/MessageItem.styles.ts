@@ -5,6 +5,7 @@ export const styles = css`
     position: relative;
     border-radius: 12px;
     padding: 12px 14px;
+    min-width: 164px;
   }
 
   .MessageItem:before {
@@ -22,6 +23,27 @@ export const styles = css`
     font-size: 10px;
     color: #273746;
     z-index: 1;
+  }
+
+  .MessageItem-status {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 2px;
+    margin-left: 4px;
+  }
+
+  .MessageItem-status[data-value="online"] {
+    background-color: green;
+  }
+
+  .MessageItem-status[data-value="offline"] {
+    background-color: red;
+  }
+
+  .MessageItem-meta--info {
+    display: flex;
+    align-items: center;
   }
 
   .MessageItem-meta--time {

@@ -7,8 +7,8 @@ import { MessageInput } from "./MessageInput";
 import { styles } from "./Chat.styles";
 
 export const Chat = () => {
-  const { messages, users } = useChat();
-  const { currentUser } = useSettings();
+  const { messages, users, sendMessage } = useChat();
+  const { currentUser, settings } = useSettings();
 
   console.log("Chat#render");
 
@@ -26,7 +26,11 @@ export const Chat = () => {
         </div>
       </div>
 
-      <MessageInput currentUser={currentUser} />
+      <MessageInput
+        currentUser={currentUser}
+        ctrlEnter={settings.ctrlEnter}
+        onSend={sendMessage}
+      />
     </div>
   );
 };

@@ -27,11 +27,17 @@ export const MessageList = React.memo(
 
         {!isEmpty &&
           messages.map((message) => {
+            const sender = users[message.userId];
+
             return (
-              <div key={message.id} className="MessageList-item">
+              <div
+                key={message.id}
+                className="MessageList-item"
+                data-own={sender.id === currentUser.id}
+              >
                 <MessageItem
                   message={message}
-                  sender={users[message.userId]}
+                  sender={sender}
                   currentUser={currentUser}
                 />
               </div>

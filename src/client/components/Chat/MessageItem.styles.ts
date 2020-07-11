@@ -63,6 +63,10 @@ export const styles = css`
     margin-top: 4px;
   }
 
+  .MessageItem-content span {
+    white-space: pre-wrap;
+  }
+
   .MessageItem-content img {
     max-width: 100%;
   }

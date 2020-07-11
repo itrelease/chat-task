@@ -1,9 +1,11 @@
 import express, { Request, Response } from "express";
 import socket from "socket.io";
 import { nanoid } from "nanoid";
+import isURL from "is-url";
 
 const app = express();
 const PORT = 3000;
+const imageExtensionsWhitelist = ["jpg", "jpeg", "png", "gif", "webp"];
 
 app.get("/", (_req: Request, res: Response) => {
   res.status(200).send("Hello World!");
@@ -54,16 +56,40 @@ io.on("connection", function (socket: CustomSocketType) {
     userId: string;
     message: string;
   }) {
+    const separators = message.match(/(\s+)/g) || [];
+    const messageItems = message.split(/\s+/g);
+    const data: Array<MessageDataType> = messageItems.reduce(
+      (acc, item, index) => {
+        if (isURL(item)) {
+          const extension = item.split(".").slice(-1)[0];
+          const contentType =
+            imageExtensionsWhitelist.indexOf(extension) > -1
+              ? "image"
+              : "unknown";
+
+          acc.push({
+            type: "url",
+            value:
+              contentType === "image" ? item : item + (separators[index] || ""),
+            contentType,
+          });
+        } else {
+          acc.push({
+            type: "text",
+            value: item + (separators[index] || ""),
+          });
+        }
+
+        return acc;
+      },
+      []
+    );
+
     const prepatedMessage: MessageType = {
       id: nanoid(),
       userId,
       timestamp: Date.now(),
-      data: [
-        {
-          type: "text",
-          value: message,
-        },
-      ],
+      data,
     };
 
     io.emit("receiveMessage", {

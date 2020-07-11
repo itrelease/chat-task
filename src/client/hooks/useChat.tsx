@@ -40,7 +40,6 @@ const ChatProvider: FunctionComponent<PropsType> = ({
   );
   const [chat, setChat] = useState<ChatType>({
     messages: [],
-    messageIndexById: {},
     users: {},
     updateUserName: handleUpdateUserName,
     sendMessage: handleSendMessage,

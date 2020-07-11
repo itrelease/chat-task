@@ -12,7 +12,6 @@ type PropsType = {
 
 export const MessageList = React.memo(
   ({ currentUser, messages, users }: PropsType) => {
-    console.log("MessageList#render", { currentUser, messages, users });
     const ref = useRef<HTMLDivElement>(null);
     const isEmpty = messages.length === 0;
 

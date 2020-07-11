@@ -46,7 +46,6 @@ export const MessageInput = React.memo(
       },
       [message, ctrlEnter, onSend]
     );
-    console.log("MessageInput#render", { currentUser });
 
     useEffect(() => {
       if (inputRef.current) {

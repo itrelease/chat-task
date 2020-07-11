@@ -10,8 +10,6 @@ export const Chat = () => {
   const { messages, users, sendMessage } = useChat();
   const { currentUser, settings } = useSettings();
 
-  console.log("Chat#render");
-
   return (
     <div className="Chat">
       <style jsx>{styles}</style>

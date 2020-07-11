@@ -11,7 +11,6 @@ type PropsType = {
 
 export const MessageItem = React.memo(
   ({ currentUser, sender, message }: PropsType) => {
-    console.log("MessageItem#render", { currentUser, sender, message });
     const style = {
       backgroundColor: sender.color,
     };

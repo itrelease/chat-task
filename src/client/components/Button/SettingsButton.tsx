@@ -6,7 +6,6 @@ import { IconSettings } from "../../icons/IconSettings";
 
 export const SettingsButton = () => {
   const { open } = useModal();
-  console.log("SettingsButton#render");
   const handleClick = () => {
     open("settings");
   };

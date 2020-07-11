@@ -15,8 +15,6 @@ export const Timestamp = React.memo(({ timestamp }: PropsType) => {
     minute: "2-digit",
   });
 
-  console.log("Timestamp#render", { timestamp, settings });
-
   return (
     <span className="Timestamp">
       <style jsx>{styles}</style>

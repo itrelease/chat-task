@@ -8,8 +8,6 @@ import { SettingsButton } from "../Button/SettingsButton";
 import { Modal } from "../Modal/Modal";
 
 export const App = () => {
-  console.log("App#render");
-
   return (
     <div className="App">
       <style jsx>{globalStyles}</style>

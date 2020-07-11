@@ -16,8 +16,6 @@ export const Button: FunctionComponent<PropsType> = ({
   disabled = false,
   onClick,
 }) => {
-  console.log("Button#render", children);
-
   return (
     <button
       className="Button"

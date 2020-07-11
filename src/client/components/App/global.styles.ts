@@ -19,6 +19,11 @@ export const globalStyles = css.global`
     display: flex;
   }
 
+  input,
+  select {
+    font-size: 100%;
+  }
+
   body,
   p,
   h1,

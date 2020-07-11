@@ -47,12 +47,6 @@ export const MessageInput = React.memo(
       [message, ctrlEnter, onSend]
     );
 
-    useEffect(() => {
-      if (inputRef.current) {
-        inputRef.current.focus();
-      }
-    }, []);
-
     return (
       <div className="MessageInput">
         <style jsx>{styles}</style>
@@ -65,6 +59,7 @@ export const MessageInput = React.memo(
           placeholder="Type your message..."
           onChange={handleMessageChange}
           onKeyDown={handleKeyDown}
+          autoFocus
         />
 
         <Button

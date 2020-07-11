@@ -1,5 +1,5 @@
 ## What is it
-It’s a SPA socket.io based chat interface
+It’s a SPA socket.io based chat application
 
 ## Prerequisite
 * Tested on NodeJS v12.14.1
@@ -7,6 +7,9 @@ It’s a SPA socket.io based chat interface
 ## Install
 1. `yarn`
 2. `yarn dev`
+
+## Run
+* Open `http://localhost:8080`
 
 ## Checklist:
 

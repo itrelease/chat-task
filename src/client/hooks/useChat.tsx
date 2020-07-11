@@ -61,13 +61,17 @@ const ChatProvider: FunctionComponent<PropsType> = ({
     message: MessageType;
     user: UserType;
   }) => {
+    const storedUser = chat.users[user.id];
+
     setChat({
       ...chat,
       messages: chat.messages.concat(message),
-      users: {
-        ...chat.users,
-        [user.id]: user,
-      },
+      users: !storedUser
+        ? {
+            ...chat.users,
+            [user.id]: user,
+          }
+        : chat.users,
     });
   };
 

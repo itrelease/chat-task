@@ -62,7 +62,12 @@ export const SettingsModal = () => {
             value={newUserName}
             onChange={handleUserNameChange}
           />
-          <Button type="fill" color="blue" onClick={saveUserName}>
+          <Button
+            type="fill"
+            color="blue"
+            disabled={!newUserName}
+            onClick={saveUserName}
+          >
             <IconSendMessage tintColor="#fff" />
           </Button>
         </div>

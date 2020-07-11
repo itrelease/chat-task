@@ -7,11 +7,17 @@ export const styles = css`
     border: 1px solid transparent;
     background-color: transparent;
     padding: 0;
-    transition: background-color 0.25s ease-out;
+    transition: background-color 0.25s ease-out, filter 0.25s ease-out,
+      border-color 0.25s ease-out, opacity 0.25s ease-out;
     padding: 6px;
     border-radius: 50%;
     cursor: pointer;
     outline: none;
+  }
+
+  .Button:disabled {
+    opacity: 0.5;
+    pointer-events: none;
   }
 
   /* FILL */

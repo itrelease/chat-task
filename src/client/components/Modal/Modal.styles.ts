@@ -24,7 +24,7 @@ export const styles = css`
     position: relative;
     background-color: #fff;
     border-radius: 12px;
-    padding: 32px 24px 24px;
+    padding: 46px 24px 24px;
   }
 
   .Modal-close {

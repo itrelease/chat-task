@@ -9,6 +9,12 @@ export const styles = css`
     overflow: scroll;
   }
 
+  .MessageList[data-empty="true"] {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
   .MessageList-item {
     display: flex;
     justify-content: flex-start;

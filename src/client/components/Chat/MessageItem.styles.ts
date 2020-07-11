@@ -68,7 +68,13 @@ export const styles = css`
   }
 
   .MessageItem-content img {
+    display: block;
+    margin: 6px 0;
     max-width: 100%;
+  }
+
+  .MessageItem-content img:first-child {
+    margin-top: 0;
   }
 
   .MessageItem-arrow {

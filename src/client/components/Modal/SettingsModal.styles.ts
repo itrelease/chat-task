@@ -57,7 +57,7 @@ export const styles = css`
     cursor: pointer;
     display: block;
     margin: 0 auto;
-    color: #6a6a6a;
+    color: #f44336;
     outline: none;
   }
 `;

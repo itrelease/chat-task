@@ -21,7 +21,7 @@ export const MessageInput = React.memo(({ currentUser }: PropsType) => {
         placeholder="Type your message..."
       />
 
-      <Button color="dark" onClick={() => {}}>
+      <Button type="fill" color="blue" onClick={() => {}}>
         <IconSendMessage tintColor="#fff" />
       </Button>
     </div>

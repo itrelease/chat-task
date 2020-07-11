@@ -1,12 +1,14 @@
 import React from "react";
 
 import { useChat } from "../../hooks/useChat";
+import { useSettings } from "../../hooks/useSettings";
 import { MessageList } from "./MessageList";
 import { MessageInput } from "./MessageInput";
 import { styles } from "./Chat.styles";
 
 export const Chat = () => {
-  const { currentUser, messages, users } = useChat();
+  const { messages, users } = useChat();
+  const { currentUser } = useSettings();
 
   console.log("Chat#render");
 

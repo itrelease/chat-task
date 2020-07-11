@@ -5,7 +5,7 @@ import { styles } from "./App.styles";
 import { Header } from "../Header/Header";
 import { Chat } from "../Chat/Chat";
 import { SettingsButton } from "../Button/SettingsButton";
-import { SettingsModal } from "../SettingsModal/SettingsModal";
+import { Modal } from "../Modal/Modal";
 
 export const App = () => {
   console.log("App#render");
@@ -21,7 +21,7 @@ export const App = () => {
         <Chat />
       </div>
 
-      <SettingsModal />
+      <Modal />
     </div>
   );
 };

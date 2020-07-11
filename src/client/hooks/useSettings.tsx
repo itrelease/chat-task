@@ -1,26 +1,37 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 
-import { SETTINGS_KEY } from "../constants";
+import { SETTINGS_KEY, CURRENT_USER_KEY } from "../constants";
 import { isStorageAvailable } from "../utils/isStorageAvailable";
 
 type PropsType = {
+  currentUser: CurrentUserType;
   settings: SettingsType;
 };
 
 const SettingsContext = React.createContext<{
-  status: SettingsStatusType;
+  currentUser: CurrentUserType;
   settings: SettingsType;
-  open: () => void;
-  close: () => void;
+  updateCurrentUser: (newCurrentUser: CurrentUserType) => void;
   updateSettings: (newSettings: SettingsType) => void;
 }>(null);
 
 const SettingsProvider: FunctionComponent<PropsType> = ({
+  currentUser,
   settings,
   children,
 }) => {
-  const [status, setStatus] = useState<SettingsStatusType>("closed");
+  const [_currentUser, setCurrentUser] = useState<CurrentUserType>(currentUser);
   const [currentSettings, setSettings] = useState<SettingsType>(settings);
+  const updateCurrentUser = (newCurrentUser: CurrentUserType) => {
+    if (isStorageAvailable("localStorage")) {
+      window.localStorage.setItem(
+        CURRENT_USER_KEY,
+        JSON.stringify(newCurrentUser)
+      );
+    }
+
+    setCurrentUser(newCurrentUser);
+  };
   const updateSettings = (newSettings: SettingsType) => {
     if (isStorageAvailable("localStorage")) {
       window.localStorage.setItem(SETTINGS_KEY, JSON.stringify(newSettings));
@@ -28,26 +39,12 @@ const SettingsProvider: FunctionComponent<PropsType> = ({
 
     setSettings(newSettings);
   };
-  const close = () => {
-    setStatus("closing");
 
-    setTimeout(() => {
-      setStatus("closed");
-    }, 0);
-  };
-  const open = () => {
-    setStatus("opening");
-
-    setTimeout(() => {
-      setStatus("opened");
-    }, 0);
-  };
   const value = {
-    status,
+    currentUser: _currentUser,
     settings: currentSettings,
+    updateCurrentUser,
     updateSettings,
-    open,
-    close,
   };
 
   return (

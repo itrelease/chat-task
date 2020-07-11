@@ -2,40 +2,53 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { nanoid } from "nanoid";
 
-import { CURRENT_USER_ID_KEY, SETTINGS_KEY, USER_SETTINGS } from "./constants";
+import { CURRENT_USER_KEY, SETTINGS_KEY, USER_SETTINGS } from "./constants";
 import { App } from "./components/App/App";
+import { ModalProvider } from "./hooks/useModal";
 import { SettingsProvider } from "./hooks/useSettings";
 import { ChatProvider } from "./hooks/useChat";
 import { isStorageAvailable } from "./utils/isStorageAvailable";
+import { getColorFromId } from "./utils/getColorFromId";
 
-let currentUserId = null;
+let currentUser: CurrentUserType = null;
 let userSettings = USER_SETTINGS;
 
 const isLocalStorageAvailable = isStorageAvailable("localStorage");
 
 if (isLocalStorageAvailable) {
-  currentUserId = window.localStorage.getItem(CURRENT_USER_ID_KEY);
-
+  const lastCurrentUser = window.localStorage.getItem(CURRENT_USER_KEY);
   const lastStoredSettings = window.localStorage.getItem(SETTINGS_KEY);
+
+  if (lastCurrentUser) {
+    currentUser = JSON.parse(lastCurrentUser);
+  }
 
   if (lastStoredSettings) {
     userSettings = JSON.parse(lastStoredSettings);
   }
 }
 
-if (!currentUserId) {
-  currentUserId = `Guest${nanoid()}`;
+if (!currentUser) {
+  const userId = nanoid();
+
+  currentUser = {
+    id: userId,
+    name: `Guest-${userId.slice(0, 5)}`,
+    color: getColorFromId(userId),
+  };
 
   if (isLocalStorageAvailable) {
-    window.localStorage.setItem(CURRENT_USER_ID_KEY, currentUserId);
+    window.localStorage.setItem(CURRENT_USER_KEY, JSON.stringify(currentUser));
   }
 }
 
 ReactDOM.render(
-  <SettingsProvider settings={userSettings}>
-    <ChatProvider currentUserId={currentUserId}>
-      <App />
-    </ChatProvider>
-  </SettingsProvider>,
+  <ModalProvider>
+    <SettingsProvider currentUser={currentUser} settings={userSettings}>
+      <ChatProvider currentUser={currentUser}>
+        <App />
+      </ChatProvider>
+    </SettingsProvider>
+  </ModalProvider>,
   document.getElementById("app")
 );

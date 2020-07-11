@@ -1,13 +1,19 @@
-type SettingsStatusType = "closed" | "closing" | "opening" | "opened";
+type ModalType = "settings";
+
+type ModalStatusType = "closed" | "closing" | "opening" | "opened";
 
 type SettingsType = {
   timeFormat: "12h" | "24h";
   ctrlEnter: boolean;
 };
 
-type UserType = {
+type CurrentUserType = {
   id: string;
+  name: string;
   color: string;
+};
+
+type UserType = CurrentUserType & {
   online: boolean;
 };
 
@@ -30,8 +36,8 @@ type MessageType = {
 };
 
 type ChatType = {
-  currentUser: UserType;
   users: { [key: string]: UserType };
   messageIndexById: { [key: string]: number };
   messages: Array<MessageType>;
+  updateUserName: (userId: string, userName: string) => void;
 };

@@ -1,14 +1,14 @@
 import React from "react";
 
-import { useSettings } from "../../hooks/useSettings";
+import { useModal } from "../../hooks/useModal";
 import { Button } from "./Button";
 import { IconSettings } from "../../icons/IconSettings";
 
 export const SettingsButton = () => {
-  const { open } = useSettings();
+  const { open } = useModal();
   console.log("SettingsButton#render");
   const handleClick = () => {
-    open();
+    open("settings");
   };
 
   return (

@@ -5,7 +5,7 @@ import { IconSendMessage } from "../../icons/IconSendMessage";
 import { styles } from "./MessageInput.styles";
 
 type PropsType = {
-  currentUser: UserType;
+  currentUser: CurrentUserType;
 };
 
 export const MessageInput = React.memo(({ currentUser }: PropsType) => {

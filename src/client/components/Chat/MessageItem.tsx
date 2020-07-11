@@ -4,7 +4,7 @@ import { Timestamp } from "./Timestamp";
 import { styles } from "./MessageItem.styles";
 
 type PropsType = {
-  currentUser: UserType;
+  currentUser: CurrentUserType;
   sender: UserType;
   message: MessageType;
 };
@@ -35,7 +35,7 @@ export const MessageItem = React.memo(
         <style jsx>{styles}</style>
 
         <div className="MessageItem-meta">
-          <span>#{currentUser.id}</span>
+          <span>{sender.name}</span>
         </div>
 
         <div className="MessageItem-content">

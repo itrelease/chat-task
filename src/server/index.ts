@@ -14,23 +14,46 @@ const server = app.listen(PORT, () => {
 });
 
 const io = socket(server);
-const users = new Set<string>();
+const users = new Map<string, UserType>();
 
 type CustomSocketType = socket.Socket & {
-  userId: string;
+  user: UserType;
 };
 
 io.on("connection", function (socket: CustomSocketType) {
   console.log("Made socket connection");
 
-  socket.on("join", function (userId: string) {
-    socket.userId = userId;
-    users.add(userId);
-    socket.broadcast.emit("user connected", userId);
+  socket.on("join", function (user: UserType) {
+    socket.user = user;
+    users.set(user.id, user);
+    socket.broadcast.emit("userConnected", user);
+  });
+
+  socket.on("userUpdateName", function ({
+    userId,
+    userName,
+  }: {
+    userId: string;
+    userName: string;
+  }) {
+    socket.user = {
+      ...socket.user,
+      name: userName,
+    };
+
+    users.set(userId, socket.user);
+    console.log("%%%%%%%%% USER UPDATE NAME", socket.user);
+    io.emit("userUpdate", socket.user);
   });
 
   socket.on("disconnect", () => {
-    users.delete(socket.userId);
-    socket.broadcast.emit("user disconnected", socket.userId);
+    users.delete(socket.user.id);
+
+    const disconnectedUser = {
+      ...socket.user,
+      online: false,
+    };
+
+    socket.broadcast.emit("userDisconnected", disconnectedUser);
   });
 });

@@ -8,72 +8,40 @@ import React, {
 } from "react";
 import socketIOClient from "socket.io-client";
 
-import { getColorFromId } from "../utils/getColorFromId";
-
 type PropsType = {
-  currentUserId: string;
+  currentUser: CurrentUserType;
 };
 
 const ChatContext = React.createContext<ChatType>(null);
 
 const ChatProvider: FunctionComponent<PropsType> = ({
-  currentUserId,
+  currentUser,
   children,
 }) => {
   const socketInstance = useRef(null);
-  const [chat, setChat] = useState<ChatType>({
-    currentUser: {
-      id: currentUserId,
-      online: true,
-      color: getColorFromId(currentUserId),
+  const handleUpdateUserName = useCallback(
+    (userId: string, userName: string) => {
+      if (socketInstance.current) {
+        socketInstance.current.emit("userUpdateName", { userId, userName });
+      }
     },
+    [socketInstance.current]
+  );
+  const [chat, setChat] = useState<ChatType>({
     messages: [],
     messageIndexById: {},
     users: {},
+    updateUserName: handleUpdateUserName,
   });
-  const handleUserConnected = useCallback(
-    (userId: string) => {
-      console.log("handleUserConnected", userId);
-      const user = chat.users[userId];
+  const handleUserUpdate = useCallback(
+    (user: UserType) => {
+      console.log("handleUserUpdate", user);
 
       setChat({
         ...chat,
         users: {
           ...chat.users,
-          [userId]: user
-            ? {
-                ...user,
-                online: true,
-              }
-            : {
-                id: userId,
-                online: true,
-                color: getColorFromId(userId),
-              },
-        },
-      });
-    },
-    [chat]
-  );
-  const handleUserDisconnect = useCallback(
-    (userId: string) => {
-      console.log("handleUserDisconnect", userId);
-      const user = chat.users[userId];
-
-      setChat({
-        ...chat,
-        users: {
-          ...chat.users,
-          [userId]: user
-            ? {
-                ...user,
-                online: false,
-              }
-            : {
-                id: userId,
-                online: false,
-                color: getColorFromId(userId),
-              },
+          [user.id]: user,
         },
       });
     },
@@ -85,12 +53,14 @@ const ChatProvider: FunctionComponent<PropsType> = ({
       socketInstance.current = socketIOClient.connect("http://localhost:3000");
 
       socketInstance.current.on("connect", () => {
-        socketInstance.current.emit("join", currentUserId);
+        socketInstance.current.emit("join", currentUser);
       });
 
-      socketInstance.current.on("user connected", handleUserConnected);
+      socketInstance.current.on("userConnected", handleUserUpdate);
 
-      socketInstance.current.on("user disconnected", handleUserDisconnect);
+      socketInstance.current.on("userDisconnected", handleUserUpdate);
+
+      socketInstance.current.on("userUpdate", handleUserUpdate);
 
       // socketInstance.current.on("new message", (data) => {
       //   console.log("new message", data);

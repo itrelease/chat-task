@@ -25,12 +25,18 @@ export const styles = css`
     z-index: 1;
   }
 
+  .MessageItem-senderName {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   .MessageItem-status {
     display: inline-block;
     width: 4px;
     height: 4px;
     border-radius: 2px;
     margin-left: 4px;
+    flex: 0 0 auto;
   }
 
   .MessageItem-status[data-value="online"] {
@@ -44,6 +50,7 @@ export const styles = css`
   .MessageItem-meta--info {
     display: flex;
     align-items: center;
+    white-space: nowrap;
   }
 
   .MessageItem-meta--time {

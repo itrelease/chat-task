@@ -35,7 +35,7 @@ export const MessageItem = React.memo(
         <style jsx>{styles}</style>
 
         <div className="MessageItem-meta MessageItem-meta--info">
-          <span>{sender.name}</span>
+          <span className="MessageItem-senderName">{sender.name}</span>
 
           {sender.id !== currentUser.id && (
             <span

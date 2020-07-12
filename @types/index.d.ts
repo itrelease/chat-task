@@ -34,10 +34,3 @@ type MessageType = {
   timestamp: number;
   data: Array<MessageDataType>;
 };
-
-type ChatType = {
-  users: { [key: string]: UserType };
-  messages: Array<MessageType>;
-  updateUserName: (userId: string, userName: string) => void;
-  sendMessage: (message: string) => void;
-};

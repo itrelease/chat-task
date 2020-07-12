@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useContext, useState } from "react";
 
-import { SETTINGS_KEY, CURRENT_USER_KEY } from "../constants";
-import { isStorageAvailable } from "../utils/isStorageAvailable";
+import { SETTINGS_KEY, CURRENT_USER_KEY } from "@root/constants";
+import { isStorageAvailable } from "@utils/isStorageAvailable";
 
 type PropsType = {
   currentUser: CurrentUserType;

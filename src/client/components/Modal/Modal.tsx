@@ -1,8 +1,9 @@
 import React, { useCallback, useEffect } from "react";
 
-import { useModal } from "../../hooks/useModal";
-import { IconClose } from "../../icons/IconClose";
-import { Button } from "../Button/Button";
+import { useModal } from "@hooks/useModal";
+import { IconClose } from "@icons/IconClose";
+import { Button } from "@components/Button/Button";
+
 import { SettingsModal } from "./SettingsModal";
 import { styles } from "./Modal.styles";
 

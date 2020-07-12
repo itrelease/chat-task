@@ -1,11 +1,12 @@
 import React from "react";
 
+import { Header } from "@components/Header/Header";
+import { Chat } from "@components/Chat/Chat";
+import { SettingsButton } from "@components/Button/SettingsButton";
+import { Modal } from "@components/Modal/Modal";
+
 import { globalStyles } from "./global.styles";
 import { styles } from "./App.styles";
-import { Header } from "../Header/Header";
-import { Chat } from "../Chat/Chat";
-import { SettingsButton } from "../Button/SettingsButton";
-import { Modal } from "../Modal/Modal";
 
 export const App = () => {
   return (

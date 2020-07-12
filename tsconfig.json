@@ -14,9 +14,13 @@
     "isolatedModules": true,
     "downlevelIteration": true,
     "jsx": "react",
-    "baseUrl": "./",
+    "baseUrl": ".",
     "paths": {
-      "@src/*": ["./src/*"]
+      "@root/*": ["./src/client/*"],
+      "@components/*": ["./src/client/components/*"],
+      "@icons/*": ["./src/client/icons/*"],
+      "@hooks/*": ["./src/client/hooks/*"],
+      "@utils/*": ["./src/client/utils/*"]
     }
   },
   "exclude": ["node_modules"],

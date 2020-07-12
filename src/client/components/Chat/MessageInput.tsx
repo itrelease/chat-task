@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
 
-import { Button } from "../Button/Button";
-import { IconSendMessage } from "../../icons/IconSendMessage";
+import { Button } from "@components/Button/Button";
+import { IconSendMessage } from "@icons/IconSendMessage";
+
 import { styles } from "./MessageInput.styles";
 
 type PropsType = {

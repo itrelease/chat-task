@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from "react";
 
-import { USER_SETTINGS } from "../../constants";
-import { useSettings } from "../../hooks/useSettings";
-import { useChat } from "../../hooks/useChat";
-import { Button } from "../Button/Button";
-import { IconSendMessage } from "../../icons/IconSendMessage";
+import { USER_SETTINGS } from "@root/constants";
+import { useSettings } from "@hooks/useSettings";
+import { useChat } from "@hooks/useChat";
+import { Button } from "@components/Button/Button";
+import { IconSendMessage } from "@icons/IconSendMessage";
+
 import { styles } from "./SettingsModal.styles";
 
 const OnOffMap = {

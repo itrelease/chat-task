@@ -1,7 +1,8 @@
 import React from "react";
 
-import { useChat } from "../../hooks/useChat";
-import { useSettings } from "../../hooks/useSettings";
+import { useChat } from "@hooks/useChat";
+import { useSettings } from "@hooks/useSettings";
+
 import { MessageList } from "./MessageList";
 import { MessageInput } from "./MessageInput";
 import { styles } from "./Chat.styles";

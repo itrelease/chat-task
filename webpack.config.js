@@ -11,6 +11,13 @@ module.exports = {
   },
   resolve: {
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
+    alias: {
+      "@root": path.join(__dirname, "src", "client"),
+      "@components": path.join(__dirname, "src", "client", "components"),
+      "@icons": path.join(__dirname, "src", "client", "icons"),
+      "@hooks": path.join(__dirname, "src", "client", "hooks"),
+      "@utils": path.join(__dirname, "src", "client", "utils"),
+    },
   },
   module: {
     rules: [

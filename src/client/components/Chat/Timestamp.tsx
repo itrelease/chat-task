@@ -1,6 +1,7 @@
 import React from "react";
 
-import { useSettings } from "../../hooks/useSettings";
+import { useSettings } from "@hooks/useSettings";
+
 import { styles } from "./Timestamp.styles";
 
 type PropsType = {

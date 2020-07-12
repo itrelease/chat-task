@@ -8,11 +8,18 @@ import React, {
 } from "react";
 import socketIOClient from "socket.io-client";
 
+type ChatContextType = {
+  users: { [key: string]: UserType };
+  messages: Array<MessageType>;
+  updateUserName: (userId: string, userName: string) => void;
+  sendMessage: (message: string) => void;
+};
+
 type PropsType = {
   currentUser: CurrentUserType;
 };
 
-const ChatContext = React.createContext<ChatType>(null);
+const ChatContext = React.createContext<ChatContextType>(null);
 
 const ChatProvider: FunctionComponent<PropsType> = ({
   currentUser,
@@ -38,7 +45,7 @@ const ChatProvider: FunctionComponent<PropsType> = ({
     },
     [socketInstance.current, currentUser]
   );
-  const [chat, setChat] = useState<ChatType>({
+  const [chat, setChat] = useState<ChatContextType>({
     messages: [],
     users: {},
     updateUserName: handleUpdateUserName,

@@ -15,6 +15,7 @@ export const MessageList = React.memo(
     const ref = useRef<HTMLDivElement>(null);
     const isEmpty = messages.length === 0;
 
+    // Auto-scroll to the bottom when new message arrived but only if a user didn't scroll up message list previously
     useEffect(() => {
       if (ref.current) {
         const { scrollHeight, scrollTop, offsetHeight } = ref.current;

@@ -113,12 +113,12 @@ io.on("connection", function (socket: CustomSocketType) {
   });
 
   socket.on("disconnect", () => {
-    users.delete(socket.user.id);
-
     const disconnectedUser = {
       ...socket.user,
       online: false,
     };
+
+    users.set(socket.user.id, disconnectedUser);
 
     io.emit("userDisconnected", disconnectedUser);
   });

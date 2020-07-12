@@ -44,6 +44,31 @@ const ChatProvider: FunctionComponent<PropsType> = ({
     updateUserName: handleUpdateUserName,
     sendMessage: handleSendMessage,
   });
+  const handleUserConnected = ({
+    connectedUser,
+    initialUsers,
+    initialMessages,
+  }: {
+    connectedUser: UserType;
+    initialUsers: { [key: string]: UserType };
+    initialMessages: Array<MessageType>;
+  }) => {
+    console.log("================", {
+      initialMessages,
+      initialUsers,
+      currentUser,
+    });
+    setChat({
+      ...chat,
+      messages:
+        connectedUser.id === currentUser.id ? initialMessages : chat.messages,
+      users: {
+        ...chat.users,
+        ...initialUsers,
+        [connectedUser.id]: connectedUser,
+      },
+    });
+  };
   const handleUserUpdate = (user: UserType) => {
     setChat({
       ...chat,
@@ -86,26 +111,32 @@ const ChatProvider: FunctionComponent<PropsType> = ({
     return () => {
       if (socketInstance.current) {
         socketInstance.current.close();
-        socketInstance.current = null;
       }
     };
   }, []);
 
   useEffect(() => {
     if (socketInstance.current) {
-      socketInstance.current.on("userConnected", handleUserUpdate);
+      socketInstance.current.on("userConnected", handleUserConnected);
       socketInstance.current.on("userDisconnected", handleUserUpdate);
       socketInstance.current.on("userUpdate", handleUserUpdate);
       socketInstance.current.on("receiveMessage", handleReceiveMessage);
     }
 
     return () => {
-      socketInstance.current.off("userConnected", handleUserUpdate);
-      socketInstance.current.off("userDisconnected", handleUserUpdate);
-      socketInstance.current.off("userUpdate", handleUserUpdate);
-      socketInstance.current.off("receiveMessage", handleReceiveMessage);
+      if (socketInstance.current) {
+        socketInstance.current.off("userConnected", handleUserConnected);
+        socketInstance.current.off("userDisconnected", handleUserUpdate);
+        socketInstance.current.off("userUpdate", handleUserUpdate);
+        socketInstance.current.off("receiveMessage", handleReceiveMessage);
+      }
     };
-  }, [socketInstance, handleUserUpdate, handleReceiveMessage]);
+  }, [
+    socketInstance,
+    handleUserUpdate,
+    handleReceiveMessage,
+    handleUserConnected,
+  ]);
 
   return <ChatContext.Provider value={chat}>{children}</ChatContext.Provider>;
 };

@@ -18,6 +18,7 @@ const server = app.listen(PORT, () => {
 
 const io = socket(server);
 const users = new Map<string, UserType>();
+const messages: Array<MessageType> = [];
 
 type CustomSocketType = socket.Socket & {
   user: UserType;
@@ -30,7 +31,18 @@ io.on("connection", function (socket: CustomSocketType) {
       online: true,
     };
     users.set(user.id, socket.user);
-    io.emit("userConnected", socket.user);
+
+    const initialMessages = messages.slice(-5);
+    const initialUsers = initialMessages.reduce((acc, message) => {
+      acc[message.userId] = users.get(message.userId);
+      return acc;
+    }, {});
+
+    io.emit("userConnected", {
+      connectedUser: socket.user,
+      initialUsers,
+      initialMessages,
+    });
   });
 
   socket.on("userUpdateName", function ({
@@ -91,6 +103,8 @@ io.on("connection", function (socket: CustomSocketType) {
       timestamp: Date.now(),
       data,
     };
+
+    messages.push(prepatedMessage);
 
     io.emit("receiveMessage", {
       message: prepatedMessage,

@@ -14,20 +14,12 @@ export const MessageItem = React.memo(
     const style = {
       backgroundColor: sender.color,
     };
-    const arrowClassName =
-      currentUser.id === sender.id
-        ? "MessageItem-arrow MessageItem-arrow--right"
-        : "MessageItem-arrow MessageItem-arrow--left";
-    const arrowStyle: {
-      borderRightColor?: string;
-      borderLeftColor?: string;
-    } = {};
-
-    if (currentUser.id === sender.id) {
-      arrowStyle.borderLeftColor = sender.color;
-    } else {
-      arrowStyle.borderRightColor = sender.color;
-    }
+    const cornerStyle = {
+      [currentUser.id === sender.id
+        ? "borderLeftColor"
+        : "borderRightColor"]: sender.color,
+    };
+    const status = sender.online ? "online" : "offline";
 
     return (
       <div className="MessageItem" style={style}>
@@ -39,7 +31,8 @@ export const MessageItem = React.memo(
           {sender.id !== currentUser.id && (
             <span
               className="MessageItem-status"
-              data-value={sender.online ? "online" : "offline"}
+              data-value={status}
+              title={status}
             />
           )}
         </div>
@@ -58,7 +51,11 @@ export const MessageItem = React.memo(
           <Timestamp timestamp={message.timestamp} />
         </div>
 
-        <span className={arrowClassName} style={arrowStyle} />
+        <span
+          className="MessageItem-corner"
+          data-type={currentUser.id === sender.id ? "right" : "left"}
+          style={cornerStyle}
+        />
       </div>
     );
   }

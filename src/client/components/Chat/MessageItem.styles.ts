@@ -77,7 +77,7 @@ export const styles = css`
     margin-top: 0;
   }
 
-  .MessageItem-arrow {
+  .MessageItem-corner {
     content: "";
     width: 0;
     height: 0;
@@ -89,12 +89,12 @@ export const styles = css`
     opacity: 0.4;
   }
 
-  .MessageItem-arrow--right {
+  .MessageItem-corner[data-type="right"] {
     right: -4px;
     border-left: 4px solid black;
   }
 
-  .MessageItem-arrow--left {
+  .MessageItem-corner[data-type="left"] {
     left: -4px;
     border-right: 4px solid black;
   }

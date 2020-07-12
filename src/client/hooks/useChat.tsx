@@ -53,20 +53,21 @@ const ChatProvider: FunctionComponent<PropsType> = ({
     initialUsers: { [key: string]: UserType };
     initialMessages: Array<MessageType>;
   }) => {
-    console.log("================", {
-      initialMessages,
-      initialUsers,
-      currentUser,
-    });
+    const isSameUser = connectedUser.id === currentUser.id;
+
     setChat({
       ...chat,
-      messages:
-        connectedUser.id === currentUser.id ? initialMessages : chat.messages,
-      users: {
-        ...chat.users,
-        ...initialUsers,
-        [connectedUser.id]: connectedUser,
-      },
+      messages: isSameUser ? initialMessages : chat.messages,
+      users: isSameUser
+        ? {
+            ...chat.users,
+            ...initialUsers,
+            [connectedUser.id]: connectedUser,
+          }
+        : {
+            ...chat.users,
+            [connectedUser.id]: connectedUser,
+          },
     });
   };
   const handleUserUpdate = (user: UserType) => {

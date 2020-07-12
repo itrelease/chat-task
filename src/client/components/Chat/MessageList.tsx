@@ -39,7 +39,7 @@ export const MessageList = React.memo(
         {!isEmpty &&
           messages.map((message) => {
             const sender = users[message.userId];
-            console.log("--------", { messages, users, currentUser, sender });
+
             return (
               <div
                 key={message.id}

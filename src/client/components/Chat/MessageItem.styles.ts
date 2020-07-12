@@ -65,6 +65,7 @@ export const styles = css`
 
   .MessageItem-content span {
     white-space: pre-wrap;
+    overflow-wrap: break-word;
   }
 
   .MessageItem-content img {

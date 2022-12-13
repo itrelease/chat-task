@@ -9,7 +9,7 @@
     "start-client": "yarn webpack-dev-server"
   },
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "is-url": "^1.2.4",
     "nanoid": "^3.1.10",
     "react": "^16.13.1",
